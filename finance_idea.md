@@ -1,4 +1,53 @@
-## 1) A comparison of machine learning methods for predicting the direction of the US stock market on the basis of volatility indices
+## 1) Text-based PEAD from earnings call language (beyond numeric EPS surprise)
+**Paper:** *PEAD.txt: Post-Earnings-Announcement Drift Using Text* (Meursault et al., 2021, Philadelphia Fed Working Paper)  
+**Idea:** Use ML/NLP on earnings-call transcripts (or related text) to build a **textual surprise** score that captures information the market underreacts to.  
+**Trading rule:** After an earnings announcement, sort firms by the textual surprise score and run **long top quantile / short bottom quantile** (or long-only top) over the post-announcement window to capture drift.
+
+---
+
+## 2) CNN on “visualized earnings history” (learning patterns from charts)
+**Paper:** *Visualizing Earnings to Predict Post-Earnings Announcement Drift: A Deep Learning Approach* (Garfinkel, Hribar, Hsiao, working paper)  
+**Idea:** Convert a firm’s multi-quarter earnings history (and possibly earnings quality) into **chart-like images**; train a CNN to map “shape patterns” to subsequent drift.  
+**Trading rule:** Around earnings announcements, use the CNN score to form **long/short portfolios** (top vs bottom) to exploit conditional PEAD.
+
+---
+
+## 3) “Reviving” PEAD using multi-quarter surprise histories + ML (conditional drift)
+**Paper:** *Reviving PEAD with Machine Learning and Historical Earnings Surprises* (Kaczmarek, 2025)  
+**Idea:** Instead of only the latest quarter surprise, feed **a long history of surprises (e.g., 8–12 quarters)** into ML to learn when/where PEAD is strongest.  
+**Trading rule:** Post-announcement, trade only when the model predicts strong drift (e.g., **long predicted winners / short predicted losers**), optionally with liquidity/size filters.
+
+---
+
+## 4) Jointly predicting “announcement-day reaction” vs “post-announcement drift”
+**Paper:** *How Does Financial Machine Learning Predict Returns from Earnings Announcements Data?* (Schnaubelt, 2020)  
+**Idea:** Use ML to separately model (i) immediate announcement-day abnormal returns and (ii) delayed post-announcement abnormal returns, using richer event features.  
+**Trading rule:** Build a **state-dependent event strategy** (e.g., avoid chasing immediate spikes; instead trade the subset predicted to exhibit delayed underreaction/drift).
+
+---
+
+## 5) Insider trading disclosures (SEC Form 4) as ML event signals
+**Paper:** *Insider Purchase Signals in Microcap Equities* (arXiv, 2026-02)  
+**Idea:** Treat Form 4 insider purchase filings as events; use gradient boosting / ML to score which filings imply stronger subsequent abnormal returns.  
+**Trading rule:** When Form 4 filings are released, trade only **high-score events** (long, or long/short vs matched controls), with strong transaction-cost/liquidity controls.
+
+---
+
+## 6) End-to-end event-driven trading with hierarchical event representations
+**Paper:** *Janus-Q: End-to-End Event-Driven Trading via Hierarchical ...* (arXiv, 2026-02)  
+**Idea:** Build an event taxonomy and learn a mapping from **event semantics → market impact** using CAR (cumulative abnormal return) as the reward/target.  
+**Trading rule:** Generate **event-conditioned trades** (direction/size) using the learned event-to-impact policy; focus on clean event definitions and leakage-safe timing.
+
+---
+
+## 7) Tail-event detection → regime-conditional reversal (trade only in “tail states”)
+**Paper:** *Can AI Detect Tail Events? Stock Performance ...* (Jurt, 2026)  
+**Idea:** Use AI/ML to detect **tail regimes** (extreme market states) and then apply strategies (e.g., reversal) only when the market is in those states.  
+**Trading rule:** Run a **gated strategy**: if the model flags a tail event, execute a predefined reversal (or alternative) trade; otherwise stay in baseline exposure.
+
+---
+
+## 8) A comparison of machine learning methods for predicting the direction of the US stock market on the basis of volatility indices
 
 **Concepts:** Directional forecasting (up/down), volatility indices (term structure + vol-of-vol), binary classification, ensemble methods, regularization, rolling / out-of-sample (OOS) evaluation, metrics (Accuracy / AUC / F1).
 
@@ -23,7 +72,7 @@ Campisi, G., Muzzioli, S., & De Baets, B. (2024). *A comparison of machine learn
 
 ---
 
-## 2) Automated trading with boosting and expert weighting
+## 9) Automated trading with boosting and expert weighting
 
 **Concepts:** Algorithmic trading, boosting, online learning / expert weighting, ensemble aggregation, risk overlays, long/short portfolio construction, abnormal returns.
 
@@ -50,7 +99,7 @@ Creamer, G., & Freund, Y. (2010). *Automated trading with boosting and expert we
 
 ---
 
-## 3) Stock index futures price prediction using feature selection and deep learning
+## 10) Stock index futures price prediction using feature selection and deep learning
 
 **Concepts:** Futures price forecasting, feature selection, deep learning sequence models, technical indicators, benchmarking vs classical ML, OOS testing.
 
